@@ -1,6 +1,4 @@
-import { Item } from './item';
-import { UpdateAgedBrie } from './updateAgedBrie';
-import { UpdateBackStage } from './updateBackStage';
+import { Item, UpdateAgedBrie, UpdateBackStage, UpdateSulfuras } from './update';
 
 export class GildedRose {
   items: Array<Item>;
@@ -28,7 +26,8 @@ export class GildedRose {
 
 
       if (item.name === 'Sulfuras, Hand of Ragnaros') {
-        return item
+        let product =  new UpdateSulfuras(item.name, item.sellIn, item.quality);
+        return product.update();
       }
 
       return item
@@ -87,3 +86,6 @@ export class GildedRose {
     return this.items;
   }
 }
+
+
+export { Item } from './update/item';
