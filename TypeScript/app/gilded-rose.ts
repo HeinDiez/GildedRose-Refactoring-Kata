@@ -22,9 +22,10 @@ export class GildedRose {
           return updateSulfuras(item);
         }
 
-        if (item.name === 'Conjured') {
-          return updateConjured(item);
+        if (item.name.indexOf('Conjured') !== -1) {
+            return updateConjured(item);
         }
+
   
         return updateDefaultItem(item);
 
