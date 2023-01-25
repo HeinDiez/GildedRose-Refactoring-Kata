@@ -1,14 +1,6 @@
-export class Item {
-  name: string;
-  sellIn: number;
-  quality: number;
-
-  constructor(name, sellIn, quality) {
-    this.name = name;
-    this.sellIn = sellIn;
-    this.quality = quality;
-  }
-}
+import { Item } from './item';
+import { UpdateAgedBrie } from './updateAgedBrie';
+import { UpdateBackStage } from './updateBackStage';
 
 export class GildedRose {
   items: Array<Item>;
@@ -17,49 +9,30 @@ export class GildedRose {
     this.items = items;
   }
 
-  updateAgedBrie (item) {
-    let quality;
-    if (item.quality < 50) {
-      quality = item.quality + 1
-    }
-    const sellIn = item.sellIn - 1;
-    return {...item,
-      sellIn,
-      quality
-    }
-  }
-
-  updateBackStage (item) {
-    let quality
-    if (item.sellIn < 11) {
-      if (item.quality < 50) {
-        quality = item.quality + 1
-      }
-    }
-    let sellIn = item.sellIn - 1;
-
-    return {...item,
-      sellIn,
-      quality
-    }
-  }
 
   updateQuality() {
 
     return this.items.map((item)=>{
 
+
       if (item.name === 'Aged Brie') {
-        return this.updateAgedBrie(item);
+        let product = new UpdateAgedBrie(item.name, item.sellIn, item.quality);
+        return product.update();
       }
 
+
       if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
-        return this.updateBackStage(item);
+        let product =  new UpdateBackStage(item.name, item.sellIn, item.quality);
+        return product.update();
       }
+
 
       if (item.name === 'Sulfuras, Hand of Ragnaros') {
         return item
       }
+
       return item
+      
     })
   }
 
