@@ -18,16 +18,6 @@ describe('Gilded Rose', () => {
         expect(instance.length).to.equal(0);
     });
 
-    it('should perform faster than old version', () => {
-        let filledArray = new Array(100_000).fill(new Item('foo', 0, 0));
-        const startTime = performance.now();
-        const gildedRose = new GildedRose(filledArray);
-        gildedRose.updateQuality();
-        const endTime = performance.now();
-        console.log(`Test took ${endTime - startTime}ms to execute`);
-        //Old version took around 11 to 12 seconds to execute
-    });
-
     describe('Aged Brie conditions', () => { 
 
         it('increase the quality and decrease the sellin by 1', () => {
@@ -177,8 +167,17 @@ describe('Gilded Rose', () => {
 
 
 
-
-
-
+describe('Performance Gilded Rose', () => {
+    it('should perform faster than old version', () => {
+        let filledArray = new Array(100_000).fill(new Item('foo', 0, 0));
+        const startTime = performance.now();
+        const gildedRose = new GildedRose(filledArray);
+        gildedRose.updateQuality();
+        const endTime = performance.now();
+        // console.log(`Test took ${endTime - startTime}ms to execute`);
+        expect(endTime - startTime).to.lessThan(11)
+        //Old version took around 11 to 12 seconds to execute
+    });
+});
 
 
